@@ -18,7 +18,8 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
+  displayName: 'npm install'
 
 - script: |
-    npm run test
-  displayName: 'npm test'
+    npm run start
+  displayName: 'npm run start'
