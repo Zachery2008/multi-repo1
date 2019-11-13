@@ -23,3 +23,5 @@ steps:
 - script: |
     npm run build
   displayName: 'npm run build'
+
+- task: PublishBuildArtifacts@1
