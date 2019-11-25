@@ -1,10 +1,11 @@
-const express = require('express')
-const app = express()
-const port = 3000
+var express = require('express');
+var app = express();
 
-app.get('/', (req, res) => {
-    console.log(req.body)
-    res.send('Hello World!')
-})
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+// use port 3000 unless there exists a preconfigured port
+var port = process.env.port || 3001;
+
+app.listen(port);
