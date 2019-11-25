@@ -2,9 +2,9 @@
   "name": "multi-repo1",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node main.js",
+    "start": "node app.js",
     "build": "echo hello world"
   },
   "repository": {
