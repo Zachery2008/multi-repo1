@@ -1,22 +1,11 @@
-const https = require('https');
+var express = require('express');
+var app = express();
 
-const options = {
-  hostname: 'encrypted.google.com',
-  port: 443,
-  path: '/',
-  method: 'GET'
-};
-
-const req = https.request(options, (res) => {
-  console.log('statusCode:', res.statusCode);
-  console.log('headers:', res.headers);
-
-  res.on('data', (d) => {
-    process.stdout.write(d);
-  });
+app.get('/', function (req, res) {
+  res.send('Hello World!');
 });
 
-req.on('error', (e) => {
-  console.error(e);
-});
-req.end();
+// use port 3000 unless there exists a preconfigured port
+var port = process.env.port || 3000;
+
+app.listen(port);

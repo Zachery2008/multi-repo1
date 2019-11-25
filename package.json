@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Zachery2008/multi-repo1#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "generate-password": "^1.4.2"
   }
 }
-
