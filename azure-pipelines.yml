@@ -24,9 +24,9 @@ steps:
     npm run build
   displayName: 'npm run build'
 
-- task: ArchiveFiles@2
+- task: ArchiveFiles@1
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
