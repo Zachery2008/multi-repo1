@@ -32,9 +32,13 @@ steps:
     echo $(Build.ArtifactStagingDirectory)
   displayName: 'Build.ArtifactStagingDirectory'
 
+- script: |
+    echo $(Build.SourcesDirectory)
+  displayName: 'Build.SourcesDirectory'
+
 - task: ArchiveFiles@1
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
