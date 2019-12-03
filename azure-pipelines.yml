@@ -39,7 +39,7 @@ steps:
 - task: ArchiveFiles@1
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
