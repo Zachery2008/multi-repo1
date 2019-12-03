@@ -24,6 +24,14 @@ steps:
     npm run build
   displayName: 'npm run build'
 
+- script: |
+    echo $(System.DefaultWorkingDirectory)
+  displayName: 'System.DefaultWorkingDirectory'
+
+- script: |
+    echo $(Build.ArtifactStagingDirectory)
+  displayName: 'Build.ArtifactStagingDirectory'
+
 - task: ArchiveFiles@1
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
