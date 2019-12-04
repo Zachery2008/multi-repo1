@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
@@ -23,18 +23,6 @@ steps:
 - script: |
     npm run build
   displayName: 'npm run build'
-
-- script: |
-    echo $(System.DefaultWorkingDirectory)
-  displayName: 'System.DefaultWorkingDirectory'
-
-- script: |
-    echo $(Build.ArtifactStagingDirectory)
-  displayName: 'Build.ArtifactStagingDirectory'
-
-- script: |
-    echo $(Build.SourcesDirectory)
-  displayName: 'Build.SourcesDirectory'
 
 - task: ArchiveFiles@1
   inputs:
