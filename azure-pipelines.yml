@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'a6b1e910-3ce5-4159-9568-acf8cd10c4ed'
   imageRepository: 'zachtest'
   containerRegistry: 'senzakstest.azurecr.io'
-  dockerfilePath: './Dockerfile'
+  dockerfilePath: ./dockerfile'
   tag: 'latest'
   imagePullSecret: 'senzakstest4798-auth'
 
