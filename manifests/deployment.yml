@@ -1,16 +1,17 @@
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
-  name: zachtest 
+  name: hello-world-deployment
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: zachtest 
+        app: hello-world
     spec:
       containers:
         - name: zachtest 
-          image: senzakstest.azurecr.io/zachtest
+          image: senzakstest.azurecr.io/zachtest:latest
           ports:
-          - containerPort: 80
+          - containerPort: 3000
+          - name: hello-world-port
