@@ -10,3 +10,11 @@ spec:
       name: http
   selector:
     app: hello-world
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hello-world-info
+  labels:
+    account: hello-world
