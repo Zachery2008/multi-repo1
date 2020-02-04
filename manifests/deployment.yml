@@ -15,8 +15,10 @@ spec:
       labels:
         app: hello-world
     spec:
+      serviceAccountName: hello-world-service
       containers:
-      - name: zachtest 
+      - name: hello-world 
         image: senzakstest.azurecr.io/zachtest:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
