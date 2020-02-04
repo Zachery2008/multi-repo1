@@ -1,0 +1,2 @@
+# See detail of a pod, such as containers
+kubectl describe pod/<pod-name> --namespace test
