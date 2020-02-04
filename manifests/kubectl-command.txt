@@ -8,17 +8,20 @@ kubectl get pods --namespace <namespace> --show-labels
 kubectl describe pod -l "app=<app-label>, <label2>=<label2-value>" --namespace <namespace> | Select-String -Pattern "istio-proxy:|<service-name or app-name>:" -Context 0,2
 
 # See detail of a pod, such as containers
-kubectl describe pod/<pod-name> --namespace test
+kubectl describe pod/<pod-name> --namespace <namespace>
 
-# Curl a service in pod
-kubectl exec -n test hello-world-5778554654-bcsk6 -c zachtest -- curl hello-world-service:3000
+kubectl exec -it $(kubectl get pods -l app=<app-name> --namespace <namespace>  -o jsonpath='{.items[0].metadata.name}') --namespace <namespace> -c <container-name> -- c
+url hello-world:3000
+
+# Curl a service in a specific pod
+kubectl exec --namespace <namespace> <pod-name> -c <container-name> -- curl hello-world-service:3000
 
 
 --------------------------------------------------------------------------------------------------
 ### SERVICE ACCOUNT
 
 # Get list of serviceAccount 
-kubectl get serviceAccounts -n 
+kubectl get serviceAccounts --namespace <namespace>
 
 # Delete a serviceAccount
-kubectl delete serviceaccount/<service-account-name> -n test
+kubectl delete serviceaccount/<service-account-name> --namespace <namespace>
