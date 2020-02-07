@@ -5,7 +5,7 @@ metadata:
   namespace: test
 spec:
   hosts:
-  - "*"
+  - "test.lifebooster.ca"
   gateways:
   - test-gateway
   http:

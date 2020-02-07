@@ -10,6 +10,7 @@ kubectl describe pod -l "app=<app-label>, <label2>=<label2-value>" --namespace <
 # See detail of a pod, such as containers
 kubectl describe pod/<pod-name> --namespace <namespace>
 
+# Curl a service 
 kubectl exec -it $(kubectl get pods -l app=<app-name> --namespace <namespace>  -o jsonpath='{.items[0].metadata.name}') --namespace <namespace> -c <container-name> -- c
 url hello-world:3000
 
@@ -25,3 +26,23 @@ kubectl get serviceAccounts --namespace <namespace>
 
 # Delete a serviceAccount
 kubectl delete serviceaccount/<service-account-name> --namespace <namespace>
+
+
+----------------------------------------------------------------------------------------------------
+### Istio
+
+# Output a detail of a istio ingress service 
+kubectl -n istio-system get service istio-ingressgateway -o json
+
+# Output https port number, be careful of usage " and '
+kubectl -n istio-system get service istio-ingressgateway -o jsonpath="{.spec.ports[?(@.name=='https')].port}"
+
+# Output http2 port number, be careful of usage " and '
+kubectl -n istio-system get service istio-ingressgateway -o jsonpath="{.spec.ports[?(@.name=='http2')].port}"
+
+# Create a crt and key for https
+kubectl create -n istio-system secret 
+tls istio-ingressgateway-certs --key test.lifebooster.ca.key --cert test.lifebooster.ca.crt 
+
+# List crt and key of TLS for https
+kubectl exec -it -n istio-system $(kubectl -n istio-system get pods -l istio=ingressgateway -o jsonpath='{.items[0].metadata.name}') -- ls -al /etc/istio/ingressgateway-certs 
