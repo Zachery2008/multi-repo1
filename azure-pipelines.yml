@@ -58,6 +58,22 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'senz-aks-test-test'
+              namespace: 'test'
+              command: 
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+              azureSubscriptionEndpointForSecrets: 'DEV_1 (2b405d84-3a70-4166-b710-9660c783c733)'
+              azureContainerRegistry: 'senzakstest.azurecr.io'
+              configMapName: 'env'
+              forceUpdateConfigMap: true
+              configMapArguments: |
+                --from-literal=secret1="secret1"
+                --from-literal=secret2="secret2"
+                
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
@@ -70,10 +86,13 @@ stages:
             inputs:
               action: deploy
               manifests: |
+                $(Pipeline.Workspace)/manifests/configmap.yml
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
+
+          
 
