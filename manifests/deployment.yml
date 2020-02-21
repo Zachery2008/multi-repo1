@@ -22,3 +22,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+        env:
+          - name: secret1
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: secret1
