@@ -51,3 +51,9 @@ kubectl exec -it -n istio-system $(kubectl -n istio-system get pods -l istio=ing
 
 Integrate an existing ACR with existing AKS clusters
 az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acrName>
+
+------------------------------------------------------------------------------------------------------
+### General
+
+# K8s dashboard
+az aks browse --resource-group senz-aks-usce-dev --name senz-aks-backend-server-usce-dev
