@@ -44,11 +44,8 @@ stages:
     - upload: manifests
       artifact: manifests
     
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Pipeline.Workspace)/scripts'
-        artifact: 'scripts'
-        publishLocation: 'pipeline'
+    - upload: scripts
+      artifact: scripts
 
 - stage: Deploy
   displayName: Deploy stage
