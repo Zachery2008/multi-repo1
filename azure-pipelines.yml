@@ -43,6 +43,12 @@ stages:
           
     - upload: manifests
       artifact: manifests
+    
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'scripts'
+        publishLocation: 'pipeline'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -97,7 +103,7 @@ stages:
           
           - task: PowerShell@2
             inputs:
-              filePath: $(Pipeline.Workspace)/manifests/hello.ps1
+              filePath: $(Pipeline.Workspace)/scripts/hello.ps1
 
           
 
