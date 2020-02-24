@@ -45,6 +45,7 @@ stages:
       artifact: manifests
     
     - upload: scripts
+      displayName: upload scripts folder
       artifact: scripts
 
 - stage: Deploy
