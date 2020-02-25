@@ -48,6 +48,20 @@ stages:
       displayName: upload scripts folder
       artifact: scripts
 
+    - task: DownloadAFile@1
+      inputs:
+        strUrl: 'https://lbcanada.blob.core.windows.net/test/testtest/Raw1.txt?sp=r&st=2020-02-25T18:29:44Z&se=2020-02-27T02:29:44Z&spr=https&sv=2019-02-02&sr=b&sig=uHpq4xO1tEYHbkj9q8g6PpA18vxUZgV8jBEQ4iph1vM%3D'
+        strTargetDir: '$(System.DefaultWorkingDirectory)'
+        strTargetFilename: 'readme.txt'
+        authType: 'noAuth'
+        ignoreCertificateChecks: false
+        catchResponse: true
+    
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'ls'
+
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
