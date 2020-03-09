@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------------------------
-### Pod and Container
+### Pod, Node and Container
 
 # Get a list of pods with showing labels 
 kubectl get pods --namespace <namespace> --show-labels
@@ -17,6 +17,8 @@ url hello-world:3000
 # Curl a service in a specific pod
 kubectl exec --namespace <namespace> <pod-name> -c <container-name> -- curl hello-world-service:3000
 
+# See the nodes/pods with specific label(s)
+ kubectl get nodes/pods -l 'label-key1 in (value1), label-key2 in (value2),'
 
 --------------------------------------------------------------------------------------------------
 ### SERVICE ACCOUNT
