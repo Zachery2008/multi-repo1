@@ -18,6 +18,7 @@ stages:
       name: 'Self-Hosted Agents'
       demands:
         - npm
+        - docker
     steps:
     - task: Npm@1
       displayName: Build stage
