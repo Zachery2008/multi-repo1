@@ -17,9 +17,6 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'senzakstest192668d2-auth'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
   
 
 stages:
@@ -29,7 +26,9 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      name: 'Self-Hosted Agents'
+      demands:
+        - npm
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -70,7 +69,9 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      vmImage: $(vmImageName)
+      name: 'Self-Hosted Agents'
+      demands:
+        - npm
     environment: 'Zachery2008multirepo1-2358.test'
     strategy:
       runOnce:
