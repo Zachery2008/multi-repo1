@@ -33,7 +33,7 @@ stages:
       name: 'Self-Hosted Agents'
       demands:
         - npm
-        - jq
+ 
     steps:
     - task: PowerShell@2
       displayName: extract git head commit ID to serve to image tag
