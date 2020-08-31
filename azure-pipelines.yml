@@ -61,6 +61,15 @@ stages:
           echo $(imageTag)
           helm version
         failOnStderr: true
+    
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo $(jq -n '.name="zach" | .age=27 ') 
+        failOnStderr: true
 
           
 
