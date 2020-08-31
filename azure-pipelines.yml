@@ -30,93 +30,13 @@ stages:
       demands:
         - npm
     steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-          
-    - upload: manifests
-      artifact: manifests
-    
-    - upload: scripts
-      displayName: upload scripts folder
-      artifact: scripts
-
-    - task: DownloadAFile@1
-      inputs:
-        strUrl: 'https://lbcanada.blob.core.windows.net/test/testtest/Raw1.txt?sp=r&st=2020-02-25T18:29:44Z&se=2020-02-27T02:29:44Z&spr=https&sv=2019-02-02&sr=b&sig=uHpq4xO1tEYHbkj9q8g6PpA18vxUZgV8jBEQ4iph1vM%3D'
-        strTargetDir: '$(System.DefaultWorkingDirectory)'
-        strTargetFilename: 'readme.txt'
-        authType: 'noAuth'
-        ignoreCertificateChecks: false
-        catchResponse: true
-    
-    - task: PowerShell@2
+    - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'ls'
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool:
-      name: 'Self-Hosted Agents'
-      demands:
-        - npm
-    environment: 'Zachery2008multirepo1-2358.test'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'senz-aks-test-test'
-              namespace: 'test'
-              command: 
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
-              azureSubscriptionEndpointForSecrets: 'DEV_1 (2b405d84-3a70-4166-b710-9660c783c733)'
-              azureContainerRegistry: 'senzakstest.azurecr.io'
-              configMapName: 'env'
-              forceUpdateConfigMap: true
-              configMapArguments: |
-                --from-literal=secret1="secret1"
-                --from-literal=secret2="secret2"
-                
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-              
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/configmap.yml
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+        script: |
+          # Write your commands here
           
-          
-          - task: PowerShell@2
-            inputs:
-              filePath: $(Pipeline.Workspace)/scripts/hello.ps1
+          echo 'Hello world'
 
           
 
