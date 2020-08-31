@@ -68,8 +68,7 @@ stages:
         script: |
           # Write your commands here
           
-          echo $(jq -n '.name="zach" | .age=27 ') 
+          echo $(jq -n --arg acrRegistry $(acrRegistry) --arg tag $(imageTag) '.tag=$tag | .acrRegistry=$acrRegistry ') > $(build.artifactStagingDirectory)/variables.json
         failOnStderr: true
 
-          
-
+        
