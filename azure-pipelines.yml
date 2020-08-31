@@ -20,6 +20,7 @@ variables:
 
   helmVersion: '3.3.0'
   acrRegistry: 'acrsenzalphausw2.azurecr.io'
+  HELM_EXPERIMENTAL_OCI=1
   
 
 stages:
