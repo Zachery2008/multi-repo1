@@ -68,6 +68,7 @@ stages:
         script: |
           # Write your commands here
           echo $(build.artifactStagingDirectory)
+          mkdir $(build.artifactStagingDirectory)
           echo $(jq -n --arg acrRegistry $(acrRegistry) --arg tag $(imageTag) '.tag=$tag | .acrRegistry=$acrRegistry ') > $(build.artifactStagingDirectory)/variables.json
         failOnStderr: true
 
