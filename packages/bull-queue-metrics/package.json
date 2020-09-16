@@ -1,20 +1,26 @@
 {
   "name": "bull-queue-metrics",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "a service to grab bull queue metrics for Prometheus",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Zachery Zhu",
   "license": "ISC",
   "dependencies": {
+    "@types/bull": "^3.14.2",
+    "@types/express": "^4.17.8",
     "bull": "^3.18.0",
-    "bull-prom": "^3.0.0",
+    "delay": "^4.4.0",
+    "express": "^4.17.1",
     "prom-client": "^12.0.0",
     "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }
