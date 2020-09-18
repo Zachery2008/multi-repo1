@@ -8,6 +8,7 @@ trigger:
 resources:
 - repo: self
 
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -18,9 +19,3 @@ stages:
       name: 'Self-Hosted Agents'
       demands:
         - npm
-        - docker
-    steps:
-    - task: Npm@1
-      displayName: Build stage
-      inputs:
-        command: 'install'

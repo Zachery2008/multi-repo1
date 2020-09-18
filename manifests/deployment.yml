@@ -22,9 +22,19 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+
+        volumeMounts:
+          - name: azure
+            mountPath: /mnt/azure
         env:
           - name: secret1
             valueFrom:
               configMapKeyRef:
                 name: config
                 key: secret1
+      volumes:
+      - name: azure
+        azureFile:
+          secretName: azure-secret
+          shareName: aksshare
+          readOnly: false
